@@ -44,17 +44,17 @@ function App() {
           </ul>
         </div>
       </nav>
-      
+
       <main>
         <Hero />
         <About />
         <Services />
         <Skills />
         <Projects />
-        <Feedbacks />
+        {/* <Feedbacks /> */}
         <Contact />
       </main>
-      
+
       <Footer />
     </div>
   );
