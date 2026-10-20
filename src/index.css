@@ -968,6 +968,29 @@ html {
   border-radius: 6px;
 }
 
+.recaptcha-v3-disclaimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.85rem;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.recaptcha-v3-disclaimer a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.recaptcha-v3-disclaimer a:hover {
+  color: #fff;
+}
+
 .contact-submit-btn {
   width: 100%;
   justify-content: center;

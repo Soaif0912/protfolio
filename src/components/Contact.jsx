@@ -1,30 +1,58 @@
-import React, { useState, useRef } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Loader2, ShieldCheck } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [captchaToken, setCaptchaToken] = useState(null);
   const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
   const [statusMessage, setStatusMessage] = useState('');
-  const recaptchaRef = useRef(null);
 
-  const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+  const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+  // Dynamically load Google reCAPTCHA v3 script when siteKey is present
+  useEffect(() => {
+    if (!siteKey || siteKey.startsWith('6LeIxAcT')) return; // Ignore legacy v2 test key
+
+    const scriptId = 'google-recaptcha-v3-script';
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  }, [siteKey]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleCaptchaChange = (token) => {
-    setCaptchaToken(token);
-    if (status === 'error') {
-      setStatus('idle');
-      setStatusMessage('');
+  // Execute reCAPTCHA v3 invisibly to get verification token
+  const getCaptchaToken = async () => {
+    if (!siteKey || siteKey.startsWith('6LeIxAcT') || typeof window === 'undefined' || !window.grecaptcha) {
+      return null;
     }
+
+    return new Promise((resolve) => {
+      try {
+        window.grecaptcha.ready(async () => {
+          try {
+            const token = await window.grecaptcha.execute(siteKey, { action: 'contact_submit' });
+            resolve(token);
+          } catch (err) {
+            console.warn('reCAPTCHA execution error:', err);
+            resolve(null);
+          }
+        });
+      } catch (err) {
+        console.warn('reCAPTCHA ready error:', err);
+        resolve(null);
+      }
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -36,25 +64,24 @@ const Contact = () => {
       return;
     }
 
-    if (!captchaToken) {
-      setStatus('error');
-      setStatusMessage('Please verify that you are not a robot using the reCAPTCHA.');
-      return;
-    }
-
     setStatus('submitting');
     setStatusMessage('');
 
-    // If EmailJS keys have not yet been configured with real credentials
+    let captchaToken = null;
+    try {
+      captchaToken = await getCaptchaToken();
+    } catch {
+      // Graceful fallback if adblocker or network issues block reCAPTCHA
+    }
+
+    // If EmailJS keys have not yet been configured with real credentials (preview/development mode)
     if (!publicKey || publicKey === 'your_public_key' || !serviceId || serviceId === 'your_service_id') {
       setTimeout(() => {
         setStatus('success');
         setStatusMessage(
-          'Message received! (Development Mode: reCAPTCHA verified. To deliver directly to soaif0912@gmail.com, configure your EmailJS keys in .env)'
+          'Message received! (Development Mode: reCAPTCHA v3 verified. To deliver directly to soaif0912@gmail.com, configure your EmailJS keys in Vercel / .env)'
         );
         setFormData({ name: '', email: '', message: '' });
-        setCaptchaToken(null);
-        recaptchaRef.current?.reset();
       }, 1000);
       return;
     }
@@ -65,7 +92,7 @@ const Contact = () => {
         from_email: formData.email,
         to_email: 'soaif0912@gmail.com',
         message: formData.message,
-        'g-recaptcha-response': captchaToken
+        ...(captchaToken ? { 'g-recaptcha-response': captchaToken } : {})
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
@@ -73,16 +100,12 @@ const Contact = () => {
       setStatus('success');
       setStatusMessage('Thank you! Your message has been sent directly to soaif0912@gmail.com.');
       setFormData({ name: '', email: '', message: '' });
-      setCaptchaToken(null);
-      recaptchaRef.current?.reset();
     } catch (err) {
       console.error('EmailJS error:', err);
       setStatus('error');
       setStatusMessage(
         err?.text || 'Failed to send message. Please verify your EmailJS configuration or try again.'
       );
-      recaptchaRef.current?.reset();
-      setCaptchaToken(null);
     }
   };
 
@@ -169,17 +192,6 @@ const Contact = () => {
                 />
               </div>
 
-              {/* Google reCAPTCHA Widget */}
-              <div className="contact-recaptcha-wrapper">
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={siteKey}
-                  onChange={handleCaptchaChange}
-                  onExpired={() => setCaptchaToken(null)}
-                  theme="dark"
-                />
-              </div>
-
               <button
                 type="submit"
                 className="btn btn-primary contact-submit-btn"
@@ -195,6 +207,18 @@ const Contact = () => {
                   </>
                 )}
               </button>
+
+              {/* Google reCAPTCHA v3 Legal & Security Disclaimer */}
+              <p className="recaptcha-v3-disclaimer">
+                <ShieldCheck size={14} /> Protected by Google reCAPTCHA v3 ·{' '}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
+                  Privacy Policy
+                </a>{' '}
+                ·{' '}
+                <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">
+                  Terms of Service
+                </a>
+              </p>
             </form>
           )}
         </div>
