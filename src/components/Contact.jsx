@@ -133,7 +133,7 @@ const Contact = () => {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Soaif Mondal"
+                    placeholder="Name"
                     className="contact-input"
                     disabled={status === 'submitting'}
                   />
