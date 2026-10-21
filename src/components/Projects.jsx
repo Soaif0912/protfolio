@@ -12,10 +12,9 @@ const Projects = () => {
         'Developed an AI-powered social networking and chat application using Flutter, enabling personalized user matching based on interests, preferences, and responses.',
       features: [
         'AI-driven conversations using AI/ML APIs for matching & personalized recommendations',
-        'Real-time one-to-one messaging using Socket.IO with backend event handling',
-        'Responsive UI, state management, authentication, notifications, and interaction workflows'
+        'Real-time one-to-one messaging using Socket.IO with backend event handling'
       ],
-      tags: ['Flutter', 'AI/ML APIs', 'Socket.IO', 'Real-Time Chat', 'State Management'],
+      //tags: ['Flutter', 'AI/ML APIs', 'Socket.IO', 'Real-Time Chat', 'State Management'],
       link: 'https://apps.apple.com/gb/app/plugg-your-ai-middleman/id6740482309',
       linkTag: 'View on App Store',
       badge: 'App Store'
@@ -29,10 +28,9 @@ const Projects = () => {
         'Built a production Flutter-based HRMS application to streamline employee workflows and internal business operations for enterprise staff.',
       features: [
         'Leave management, loan management, attendance tracking, and employee profiles',
-        'Role-based access control (RBAC) and notification alert system',
-        'Integrated REST APIs, secure authentication, and push notifications'
+        'Role-based access control (RBAC) and notification alert system'
       ],
-      tags: ['Flutter', 'Enterprise HRMS', 'REST APIs', 'RBAC', 'Push Notifications'],
+      //tags: ['Flutter', 'Enterprise HRMS', 'REST APIs', 'RBAC', 'Push Notifications'],
       link: 'https://play.google.com/store/apps/details?id=sedco.injazmobile&hl=en_IN',
       linkTag: 'View on Play Store',
       badge: 'Google Play'
@@ -46,10 +44,9 @@ const Projects = () => {
         'Developed an Australia-based property management analytics application for evaluating rent roll health and property acquisition opportunities.',
       features: [
         'Property-wise monthly rent tracking and comprehensive portfolio analytics',
-        'State-level average earnings analysis for cross-state market comparison',
-        'Data-driven dashboards presenting property and financial insights efficiently'
+        'State-level average earnings analysis for cross-state market comparison'
       ],
-      tags: ['Flutter', 'Property FinTech', 'Data Analytics', 'Dashboards', 'REST APIs'],
+      //tags: ['Flutter', 'Property FinTech', 'Data Analytics', 'Dashboards', 'REST APIs'],
       link: 'https://play.google.com/store/apps/details?id=com.rentroll.rentroll&hl=en_IN',
       linkTag: 'View on Play Store',
       badge: 'Google Play'
@@ -63,13 +60,42 @@ const Projects = () => {
         'Developed a social platform combining wellness content with community-driven social interactions, live feeds, and in-app music streaming.',
       features: [
         'Social features including posts, likes, comments, sharing, and real-time chat',
-        'Integrated music library and in-app audio player for mindfulness audio streaming',
-        'Custom audio state management, user interactions, and multimedia synchronization'
+        'Integrated music library and in-app audio player for mindfulness audio streaming'
       ],
-      tags: ['Flutter', 'Audio Streaming', 'Community Feed', 'Real-Time Chat', 'Media Player'],
+      // tags: ['Flutter', 'Audio Streaming', 'Community Feed', 'Real-Time Chat', 'Media Player'],
       link: 'https://play.google.com/store/apps/details?id=iu.soltopiah.app&pli=1',
       linkTag: 'View on Play Store',
       badge: 'Google Play'
+    },
+    {
+      title: 'Builder Brokers Australia',
+      category: 'Construction & Home Remodeling Platform',
+      iconSrc: '/icons/technology_icon/exl_icon.webp',
+      accentColor: 'linear-gradient(135deg, rgba(217, 119, 6, 0.9), rgba(120, 53, 15, 0.95))',
+      description:
+        'A comprehensive web platform for Builder Brokers Australia (Extreme Line Construction), featuring custom home building, home renovations, and kitchen modifications.',
+      features: [
+        'Full service showcase for custom home builds, additions, kitchen & bathroom modifications',
+        'Direct online consultation and project enquiry management for homeowner estimates'
+      ],
+      link: 'https://extremelineconstruction.com/',
+      linkTag: 'Visit Live Website',
+      badge: 'Live Website'
+    },
+    {
+      title: 'Nanduji USA: Restaurant & Ordering',
+      category: 'Restaurant & Food Delivery Platform (Web)',
+      iconSrc: '/icons/technology_icon/nanduji_icon.png',
+      accentColor: 'linear-gradient(135deg, rgba(234, 88, 12, 0.85), rgba(180, 83, 9, 0.75))',
+      description:
+        'A complete web and ordering platform for Nanduji, a family-run Indian street food restaurant chain in the USA, featuring online ordering and DoorDash delivery.',
+      features: [
+        'Categorized street food menu with live pricing, detailed items, and multi-location support',
+        'Seamless online ordering workflow with integrated DoorDash delivery and pickup'
+      ],
+      link: 'https://nandujiusa.com/',
+      linkTag: 'Visit Live Website',
+      badge: 'Live Website'
     }
   ];
 
@@ -78,7 +104,7 @@ const Projects = () => {
       <div className="container">
         <h2 className="section-title">Featured Projects</h2>
         <p className="projects-subtitle">
-          Real-world, production-grade applications built with Flutter, AI, and scalable backend integrations.
+          Real-world, production-grade mobile applications and web platforms built with Flutter, React, and scalable backend integrations.
         </p>
 
         <div className="projects-grid">
@@ -120,14 +146,15 @@ const Projects = () => {
                   ))}
                 </div>
 
-                {/* Tech Tags */}
-                <div className="project-tags">
-                  {project.tags.map((tag, tIndex) => (
-                    <span key={tIndex} className="project-tag-pill">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                {/* Tech Tags */ project.tag && (
+                  <div className="project-tags">
+                    {project.tags.map((tag, tIndex) => (
+                      <span key={tIndex} className="project-tag-pill">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 {/* External Action Link */}
                 {project.link && (

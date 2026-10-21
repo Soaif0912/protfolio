@@ -5,18 +5,18 @@ const Footer = () => {
     <footer style={styles.footer}>
       <div className="container" style={styles.container}>
         <div style={styles.logoInfo}>
-          <h3 style={styles.logo}>MyPortfolio</h3>
+          <h3 style={styles.logo}>Portfolio</h3>
           <p style={styles.tagline}>Building digital experiences.</p>
         </div>
-        
+
         <div style={styles.socials}>
-          <a href="#" style={styles.socialLink}>GitHub</a>
-          <a href="#" style={styles.socialLink}>LinkedIn</a>
-          <a href="#" style={styles.socialLink}>Twitter</a>
+          <a href="https://www.linkedin.com/in/soaif-ikbal-mondal-3aa195232/" target='_blank' style={styles.socialLink}>LinkedIn</a>
+          <a href="https://github.com/Soaif0912" target='_blank' style={styles.socialLink}>GitHub</a>
+
         </div>
       </div>
       <div style={styles.copyright}>
-        <p>&copy; {new Date().getFullYear()} Your Name. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Soaif Ikbal Mondal. All rights reserved.</p>
       </div>
     </footer>
   );

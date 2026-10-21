@@ -1,22 +1,46 @@
 import React from 'react';
-import { Layout, Smartphone, Server } from 'lucide-react';
 
 const Services = () => {
   const services = [
     {
-      title: 'Web Development',
-      icon: <Layout size={40} className="text-accent-primary" />,
-      description: 'Building responsive, fast, and SEO-friendly websites using modern frameworks.'
+      title: 'Mobile App Development',
+      iconSrc: '/icons/technology_icon/flutter.png',
+      color: '#0288d1',
+      bgGradient: 'linear-gradient(135deg, rgba(2, 136, 209, 0.22), rgba(1, 87, 155, 0.08))',
+      boxShadow: '0 8px 28px rgba(2, 136, 209, 0.25)',
+      borderColor: 'rgba(2, 136, 209, 0.35)',
+      description: 'Building fluid, cross-platform mobile apps for iOS and Android with smooth 60fps animations and native hardware integration.',
+      // tags: ['Flutter', 'iOS & Android', 'State Management', 'Dart']
     },
     {
-      title: 'Mobile App Development',
-      icon: <Smartphone size={40} className="text-accent-primary" />,
-      description: 'Creating cross-platform mobile applications for iOS and Android.'
+      title: 'Web Development',
+      iconSrc: '/icons/technology_icon/react.png',
+      color: '#61dafb',
+      bgGradient: 'linear-gradient(135deg, rgba(97, 218, 251, 0.22), rgba(14, 116, 144, 0.08))',
+      boxShadow: '0 8px 28px rgba(97, 218, 251, 0.25)',
+      borderColor: 'rgba(97, 218, 251, 0.35)',
+      description: 'Crafting responsive, high-performance websites and SPAs with modern UI frameworks, fast load times, and SEO best practices.',
+      //tags: ['React.js', 'Next.js', 'Responsive UI', 'JavaScript']
     },
     {
       title: 'Backend Architecture',
-      icon: <Server size={40} className="text-accent-primary" />,
-      description: 'Designing scalable APIs, database schemas, and robust server logic.'
+      iconSrc: '/icons/technology_icon/database.png',
+      color: '#3b82f6',
+      bgGradient: 'linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(249, 115, 22, 0.08))',
+      boxShadow: '0 8px 28px rgba(59, 130, 246, 0.25)',
+      borderColor: 'rgba(59, 130, 246, 0.35)',
+      description: 'Designing scalable RESTful APIs, secure authentication flows, real-time Socket.IO events, and efficient database architectures.',
+      // tags: ['Node.js', 'REST APIs', 'Firebase', 'SQL & NoSQL']
+    },
+    {
+      title: 'AI & Smart Integration',
+      iconSrc: '/icons/technology_icon/ai.png',
+      color: '#ec4899',
+      bgGradient: 'linear-gradient(135deg, rgba(236, 72, 153, 0.22), rgba(139, 92, 246, 0.08))',
+      boxShadow: '0 8px 28px rgba(236, 72, 153, 0.25)',
+      borderColor: 'rgba(236, 72, 153, 0.35)',
+      description: 'Integrating AI/ML APIs into user-facing apps for intelligent chat, personalized recommendation systems, and automated workflows.',
+      // tags: ['AI/ML APIs', 'Smart Matching', 'Socket.IO', 'Automations']
     }
   ];
 
@@ -24,14 +48,45 @@ const Services = () => {
     <section id="services" className="animate-on-scroll">
       <div className="container">
         <h2 className="section-title">What I Do</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+        <p className="services-subtitle">
+          End-to-end engineering solutions spanning mobile apps, scalable web platforms, and intelligent backend services.
+        </p>
+
+        <div className="services-grid">
           {services.map((service, index) => (
-            <div key={index} className="glass-panel" style={{ padding: '2.5rem', textAlign: 'center', transition: 'transform 0.3s ease' }}>
-              <div style={{ marginBottom: '1.5rem', display: 'inline-block', padding: '1rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%' }}>
-                {service.icon}
+            <div
+              key={index}
+              className="glass-panel service-card"
+              style={{ '--service-color': service.color }}
+            >
+              <div
+                className="service-icon-box"
+                style={{
+                  background: service.bgGradient,
+                  border: `1px solid ${service.borderColor}`,
+                  boxShadow: service.boxShadow
+                }}
+              >
+                <img
+                  src={service.iconSrc}
+                  alt={`${service.title} icon`}
+                  className="service-icon-img"
+                  loading="lazy"
+                />
               </div>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>{service.title}</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
+
+              <h3 className="service-title">{service.title}</h3>
+              <p className="service-desc">{service.description}</p>
+
+              {service.tag && (
+                <div className="service-tags">
+                  {service.tags.map((tag, tIndex) => (
+                    <span key={tIndex} className="service-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

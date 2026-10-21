@@ -34,12 +34,12 @@ function App() {
     <div className="app">
       <nav className="nav-bar">
         <div className="container nav-container">
-          <div className="nav-logo">MyPortfolio</div>
+          <a href="#home" className="nav-logo">Portfolio</a>
           <ul className="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
@@ -49,8 +49,9 @@ function App() {
         <Hero />
         <About />
         <Services />
-        <Skills />
         <Projects />
+        <Skills />
+
         {/* <Feedbacks /> */}
         <Contact />
       </main>

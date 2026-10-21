@@ -3,6 +3,7 @@ import { ArrowRight, Mail } from 'lucide-react';
 
 const Hero = () => {
   const techStack = [
+    { name: 'WordPress', icon: 'wordpress.png' },
     { name: 'React', icon: 'react.png' },
     { name: 'Node.js', icon: 'node_js.png' },
     { name: 'Flutter', icon: 'flutter.png' },
@@ -13,7 +14,7 @@ const Hero = () => {
     { name: 'Git', icon: 'git.png' },
     { name: 'Database / SQL', icon: 'database.png' },
     { name: 'AI & ML', icon: 'ai.png' },
-    { name: 'WordPress', icon: 'wordpress.png' }
+
   ];
 
   return (
