@@ -36,18 +36,18 @@ const Projects = () => {
       badge: 'Google Play'
     },
     {
-      title: 'Rent-Roll: Property Analytics',
-      category: 'Property Management & Analytics (Flutter)',
-      iconSrc: '/icons/technology_icon/rentroll_icon.webp',
-      accentColor: 'linear-gradient(135deg, rgba(5, 150, 105, 0.8), rgba(13, 148, 136, 0.6))',
+      title: 'Rent Manager: Landlord & Property',
+      category: 'Property Management & Landlord App (Flutter)',
+      iconSrc: '/icons/technology_icon/rent_manager_icon.png',
+      accentColor: 'linear-gradient(135deg, rgba(245, 158, 11, 0.85), rgba(20, 30, 80, 0.95))',
       description:
-        'Developed an Australia-based property management analytics application for evaluating rent roll health and property acquisition opportunities.',
+        'A complete offline property management app built for independent landlords, property owners, apartment owners, PG operators, and small property managers to manage rental operations.',
       features: [
-        'Property-wise monthly rent tracking and comprehensive portfolio analytics',
-        'State-level average earnings analysis for cross-state market comparison'
+        '100% offline property & tenant management with automatic ledger cleanups and occupancy tracking',
+        'Built-in rent receipt generator with payment tracking, custom taxes, and collection status'
       ],
-      //tags: ['Flutter', 'Property FinTech', 'Data Analytics', 'Dashboards', 'REST APIs'],
-      link: 'https://play.google.com/store/apps/details?id=com.rentroll.rentroll&hl=en_IN',
+      //tags: ['Flutter', 'Property Management', 'Receipt Generator', 'Offline-First', 'SQLite'],
+      link: 'https://play.google.com/store/apps/details?id=com.akshartech.rent_manager',
       linkTag: 'View on Play Store',
       badge: 'Google Play'
     },
